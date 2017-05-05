@@ -272,14 +272,14 @@ int main(int argc, char **argv)
     if(fwrite(&hdr, 1, sizeof(hdr), fd) != sizeof(hdr)) goto fail;
     if(write_padding(fd, pagesize, sizeof(hdr))) goto fail;
 
-    if(fwrite(kernel_data, 1, hdr.kernel_size, fd) != (ssize_t) hdr.kernel_size) goto fail;
+    if(fwrite(kernel_data, 1, hdr.kernel_size, fd) != (size_t) hdr.kernel_size) goto fail;
     if(write_padding(fd, pagesize, hdr.kernel_size)) goto fail;
 
-    if(fwrite(ramdisk_data, 1, hdr.ramdisk_size, fd) != (ssize_t) hdr.ramdisk_size) goto fail;
+    if(fwrite(ramdisk_data, 1, hdr.ramdisk_size, fd) != (size_t) hdr.ramdisk_size) goto fail;
     if(write_padding(fd, pagesize, hdr.ramdisk_size)) goto fail;
 
     if(second_data) {
-        if(fwrite(second_data, 1, hdr.second_size, fd) != (ssize_t) hdr.second_size) goto fail;
+        if(fwrite(second_data, 1, hdr.second_size, fd) != (size_t) hdr.second_size) goto fail;
         if(write_padding(fd, pagesize, hdr.second_size)) goto fail;
     }
 
